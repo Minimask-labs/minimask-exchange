@@ -14,7 +14,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen relative">
       {/* Background gradient */}
-      <div className="fixed inset-0 bg-gradient-to-b from-background via-minimask-dark to-background -z-10" />
+      <div className="fixed inset-0 bg-gradient-to-b from-background to-minimask-dark -z-10" />
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,hsl(270_70%_60%/0.1),transparent_50%)] -z-10" />
 
       {/* Header */}
