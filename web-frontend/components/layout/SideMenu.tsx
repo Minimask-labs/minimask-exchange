@@ -1,11 +1,9 @@
 'use client';
-// import { Link, useLocation } from "react-router-dom";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   ArrowLeftRight,
   LayoutGrid,
-  TrendingUp,
   Target,
   Coins
 } from 'lucide-react';
@@ -18,17 +16,18 @@ import {
 
 const menuItems = [
   { path: '/', icon: ArrowLeftRight, label: 'Exchange' },
-  // { path: '/portfolio', icon: LayoutGrid, label: 'Portfolio' },
-  // { path: '/missions', icon: Target, label: 'Missions' },
-  // { path: '/earn', icon: Coins, label: 'Earn' }
+  { path: '/portfolio', icon: LayoutGrid, label: 'Portfolio' },
+  { path: '/missions', icon: Target, label: 'Missions' },
+  { path: '/earn', icon: Coins, label: 'Earn' }
 ];
 
 const SideMenu = () => {
   const pathname = usePathname();
 
+
   return (
-    <div className="fixed left-4 top-1/2 -translate-y-1/2 z-40">
-      <div className="flex flex-col gap-2 p-2 rounded-2xl bg-card/80 backdrop-blur-xl border border-minimask-border">
+    <div className="fixed lg:left-4 left-1/4 bottom-0 lg:top-1/2 lg:-translate-y-1/2 z-40">
+      <div className="flex lg:flex-col flex-row gap-2 p-2 rounded-2xl bg-card/80 backdrop-blur-xl border border-minimask-border">
         {menuItems.map((item) => {
           const isActive = pathname === item.path;
           const Icon = item.icon;
@@ -48,9 +47,9 @@ const SideMenu = () => {
                   <Icon className="w-5 h-5" />
                 </Link>
               </TooltipTrigger>
-              <TooltipContent
-                side="right"
-                className="bg-card border-minimask-border"
+               <TooltipContent
+                side={typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches ? 'top' : 'right'}
+                className="bg-card text-black border-minimask-border"
               >
                 {item.label}
               </TooltipContent>

@@ -1,19 +1,19 @@
 'use client';
 
 // import { Link, useLocation } from "react-router-dom";
-import { Wallet, MoreHorizontal, Star, Ticket } from 'lucide-react';
+import { Wallet } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { IconButton } from '@/components/ui/IconButton';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+// import { IconButton } from '@/components/ui/IconButton';
+// import Link from 'next/link';
+// import { usePathname } from 'next/navigation';
 
-const navItems = [
-  { path: '/', label: 'Exchange' },
-  // { path: '/portfolio', label: 'Portfolio' },
-  // { path: '/missions', label: 'Missions' },
-  // { path: '/earn', label: 'Earn' }
-];
-
+// const navItems = [
+//   { path: '/', label: 'Exchange' },
+//   // { path: '/portfolio', label: 'Portfolio' },
+//   // { path: '/missions', label: 'Missions' },
+//   // { path: '/earn', label: 'Earn' }
+// ];
+// , MoreHorizontal, Star, Ticket
 interface HeaderProps {
   onWalletClick: () => void;
   isWalletConnected?: boolean;
@@ -25,7 +25,7 @@ const Header = ({
   isWalletConnected = false,
   points = 0
 }: HeaderProps) => {
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-4 py-3">
@@ -41,7 +41,7 @@ const Header = ({
         </div>
 
         {/* Center Navigation */}
-        <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-card/60 backdrop-blur-xl border border-minimask-border">
+        {/* <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-card/60 backdrop-blur-xl border border-minimask-border">
           {navItems.map((item) => {
             const isActive = pathname === item.path;
             return (
@@ -59,7 +59,7 @@ const Header = ({
               </Link>
             );
           })}
-        </nav>
+        </nav> */}
 
         {/* Right Section */}
         <div className="flex items-center gap-2">

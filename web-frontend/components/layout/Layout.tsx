@@ -3,6 +3,7 @@ import { ReactNode, useState } from 'react';
 import { Header } from './Header';
 import { SideMenu } from './SideMenu';
 import { WalletPanel } from '@/components/wallet/WalletPanel';
+import { useWallets } from '@/hooks/useWallets';
 
 interface LayoutProps {
   children: ReactNode;
@@ -10,6 +11,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const [isWalletPanelOpen, setIsWalletPanelOpen] = useState(false);
+  const { isAnyWalletConnected } = useWallets();
 
   return (
     <div className="min-h-screen relative">
@@ -20,11 +22,11 @@ const Layout = ({ children }: LayoutProps) => {
       {/* Header */}
       <Header
         onWalletClick={() => setIsWalletPanelOpen(true)}
-        isWalletConnected={false}
+        isWalletConnected={isAnyWalletConnected}
       />
 
       {/* Side Menu - Hidden on mobile */}
-      <div className="hidden lg:block">
+      <div className="block">
         <SideMenu />
       </div>
 

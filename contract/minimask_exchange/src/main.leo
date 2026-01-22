@@ -16,9 +16,9 @@ program minimask_exchange.aleo {
     async constructor() {}
 
 
-        // Define the address where your platform fees will be sent
+    // Define the address where your platform fees will be sent
     const TREASURY: address = aleo1your_treasury_address_here...;
- // Mapping of merchant address to their locked balance
+    // Mapping of merchant address to their locked balance
     mapping merchant_vault: address => u64;
     // Stores: merchant_address => amount_pending_withdrawal
     mapping pending_withdrawals: address => u64;
