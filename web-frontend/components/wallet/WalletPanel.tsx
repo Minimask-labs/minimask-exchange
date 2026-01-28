@@ -4,18 +4,18 @@ import {
   SheetHeader,
   SheetTitle
 } from '@/components/ui/sheet';
-import { GradientButton } from '@/components/ui/GradientButton';
+// import { GradientButton } from '@/components/ui/GradientButton';
 import { IconButton } from '@/components/ui/IconButton';
 import { WalletAddress } from '@/components/ui/WalletAddress';
 import { ChainIcon } from '@/components/ui/ChainIcon';
 import { ExternalLink, Copy, Power, Wallet } from 'lucide-react';
 import { useWallets } from '@/hooks/useWallets';
-import { useConnectModal } from '@rainbow-me/rainbowkit';
-import { useWalletModal } from '@solana/wallet-adapter-react-ui';
+// import { useConnectModal } from '@rainbow-me/rainbowkit';
+// import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import { toast } from 'sonner';
 import { WalletMultiButton } from '@provablehq/aleo-wallet-adaptor-react-ui';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
+// import Image from 'next/image';
+// import { Button } from '@/components/ui/button';
 import { useWallet as useAleoWallet } from '@provablehq/aleo-wallet-adaptor-react';
 
 interface WalletPanelProps {
@@ -25,8 +25,8 @@ interface WalletPanelProps {
 
 const WalletPanel = ({ isOpen, onClose }: WalletPanelProps) => {
   const { connectedWallets, disconnectWallet } = useWallets();
-  const { openConnectModal } = useConnectModal();
-  const { setVisible: setSolanaModalVisible } = useWalletModal();
+  // const { openConnectModal } = useConnectModal();
+  // const { setVisible: setSolanaModalVisible } = useWalletModal();
 
   const {
     connected: aleoConnected // boolean - whether wallet is connected
@@ -76,7 +76,7 @@ const WalletPanel = ({ isOpen, onClose }: WalletPanelProps) => {
         <div className="mt-6 space-y-4">
           {/* Connect Buttons */}
           <div className="space-y-2">
-            <GradientButton
+            {/* <GradientButton
               fullWidth
               onClick={() => openConnectModal?.()}
               className="flex items-center justify-center !cursor-pointer gap-2"
@@ -97,7 +97,7 @@ const WalletPanel = ({ isOpen, onClose }: WalletPanelProps) => {
                 height={20}
               />
               Connect Solana Wallet
-            </Button>
+            </Button> */}
             <div className="mt-2 w-full grid grid-cols-1">
               <WalletMultiButton className="!w-full mx-auto py-3 px-4 !rounded-xl !text-primary !bg-secondary hover:!bg-secondary/80 transition-colors font-medium flex items-center justify-center gap-2">
                 <Wallet className="w-4 h-4" />

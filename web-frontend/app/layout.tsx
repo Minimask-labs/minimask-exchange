@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
  import { Toaster as Sonner } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { WalletProvider } from '@/providers/WalletProvider';
+import { ClientWalletProvider } from '@/providers/ClientWalletProvider';
 
 
 const geistSans = Geist({
@@ -31,12 +31,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <WalletProvider>
+        <ClientWalletProvider>
           <TooltipProvider>
             <Sonner />
             {children}
           </TooltipProvider>
-        </WalletProvider>
+        </ClientWalletProvider>
       </body>
     </html>
   );

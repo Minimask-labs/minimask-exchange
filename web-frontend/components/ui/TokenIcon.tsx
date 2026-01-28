@@ -32,7 +32,7 @@ const TokenIcon = ({
   networkName,
   className,
 }: TokenIconProps) => {
-  const getInitials = (s: string) => s.slice(0, 2).toUpperCase();
+  const getInitials = (s: string) => s?.slice(0, 2).toUpperCase();
 
   return (
     <div

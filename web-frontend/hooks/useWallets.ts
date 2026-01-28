@@ -6,23 +6,19 @@ import { useState, useEffect, useCallback } from 'react';
 import { ConnectedWallet } from '@/types';
 import { formatUnits } from 'viem';
 import { useWallet as useAleoWallet } from '@provablehq/aleo-wallet-adaptor-react';
+ import {
+    AleoNetworkClient
 
+ } from '@provablehq/sdk';
 export const useWallets = () => {
     // Access all aleo wallets state and methods
   
     const {
       connected: aleoConnected, // boolean - whether wallet is connected
-      connecting: aleoConnecting, // boolean - whether wallet is connecting
-      disconnecting: aleoDisconnecting, // boolean - whether wallet is disconnecting
-      reconnecting: aleoReconnecting, // boolean - whether wallet is reconnecting
       address: aleoAddress, // string | null - connected wallet address
-      network: aleoNetwork, // Network | null - current network
-      wallet: aleoWallet, // Wallet | null - connected wallet adapter
-      autoConnect: aleoAutoConnect, // boolean - autoConnect setting
-      switchNetwork: aleoSwitchNetwork, // (network: Network) => Promise<boolean>
+       wallet: aleoWallet, // Wallet | null - connected wallet adapter
       disconnect: aleoDisconnect ,// () => Promise<void>
-      wallets: aleoWallets, // Wallet[] - list of available wallet adapters
-      // ... other methods
+       // ... other methods
     } =  useAleoWallet();
   
   // EVM wallet state
@@ -43,25 +39,45 @@ export const useWallets = () => {
   } = useWallet();
   const { connection } = useConnection();
   const [solanaBalance, setSolanaBalance] = useState<string | null>(null);
-  // const [aleoBalance, setAleoBalance] = useState<string | null>(null);
+  const [aleoBalance, setAleoBalance] = useState<string | null>(null);
   // Fetch Aleo balance
-  // useEffect(() => {
-  //   const fetchAleoBalance = async () => {
-  //     if (aleoAddress) {
-  //       try {
-  //         // Implement Aleo balance fetching logic here
-  //         // For example:
-  //         // const balance = await aleoWallet.getBalance(aleoAddress);
-  //         // setAleoBalance(balance);
-  //       } catch (error) {
-  //         console.error('Failed to fetch Aleo balance:', error);
-  //         // setAleoBalance(null);
-  //       }
-  //     } else {
-  //       // setAleoBalance(null);
-  //     }
-  //   }
-  // })
+  useEffect(() => {
+    const fetchAleoBalance = async () => {
+      if (aleoAddress) {
+        try {
+          // Implement Aleo balance fetching logic here
+          // For example:
+          const networkClient = new AleoNetworkClient(
+            'https://api.provable.com/v2'
+          );
+
+          // Get public balance
+          const publicBalanceString =
+            (
+              await networkClient.getProgramMappingValue(
+                'credits.aleo',
+                'account',
+                aleoAddress
+              )
+            )?.replace(/u\d+(?:\.public)?/g, '') ?? '0';
+          const publicBalance = BigInt(publicBalanceString);
+          //  setAleoBalance(publicBalance);
+          // console.log('Aleo Public Balance:', publicBalance);
+          // Convert to readable format (Aleo has 6 decimals)
+          const balanceInAleo = (Number(publicBalance) / 1_000_000).toFixed(6);
+          setAleoBalance(balanceInAleo);
+
+          // console.log('Aleo Public Balance:', balanceInAleo, 'ALEO');
+        } catch (error) {
+          console.error('Failed to fetch Aleo balance:', error);
+          setAleoBalance(null);
+        }
+      } else {
+        setAleoBalance(null);
+      }
+    }
+    fetchAleoBalance()
+  },[aleoAddress])
   // Fetch Solana balance
   useEffect(() => {
     const fetchSolanaBalance = async () => {
@@ -114,16 +130,17 @@ export const useWallets = () => {
     });
   }
 if (aleoConnected && aleoAddress) {
+
     connectedWallets.push({
       address: aleoAddress,
       type: 'aleo',
       chainId: 'aleo',
-      balance: aleoWallet ? `0 ALEO` : undefined, // Uncomment and set aleoBalance if fetched
+      balance: aleoBalance ? `${aleoBalance} ALEO` : undefined, // Uncomment and set aleoBalance if fetched
       name: aleoWallet?.adapter.name || 'Aleo',
       icon: aleoWallet?.adapter?.icon
     });
 }
-console.log('Aleo Connected:', aleoConnected, aleoWallets, aleoAddress, 'Aleo Address:', aleoWallet);
+// console.log('Aleo Connected:', aleoConnected, aleoWallets, aleoAddress, 'Aleo Address:', aleoWallet);
 
   const isAnyWalletConnected = isEvmConnected || isSolanaConnected || aleoConnected;
 

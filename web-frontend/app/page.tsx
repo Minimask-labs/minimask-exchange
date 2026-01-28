@@ -45,8 +45,8 @@ export default function Home() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [showAllRoutes, setShowAllRoutes] = useState(false);
 
-  const fromChain = mockChains.find((c) => c.id === fromToken.chainId);
-  const toChain = mockChains.find((c) => c.id === toToken.chainId);
+  const fromChain = mockChains.find((c) => c.id === fromToken?.chainId);
+  const toChain = mockChains.find((c) => c.id === toToken?.chainId);
 
   const handleSwapTokens = () => {
     const temp = fromToken;
@@ -136,14 +136,14 @@ export default function Home() {
           >
             <div className="flex items-center gap-3">
               <TokenIcon
-                src={toToken.icon}
-                symbol={toToken.symbol}
+                src={toToken?.icon}
+                symbol={toToken?.symbol}
                 size="lg"
                 networkIcon={toChain?.icon}
                 networkName={toChain?.name}
               />
               <div className="text-left">
-                <p className="font-medium">{toToken.symbol}</p>
+                <p className="font-medium">{toToken?.symbol}</p>
                 <p className="text-xs text-muted-foreground">{toChain?.name}</p>
               </div>
             </div>
@@ -196,8 +196,8 @@ export default function Home() {
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <TokenIcon
-                  src={toToken.icon}
-                  symbol={toToken.symbol}
+                  src={toToken?.icon}
+                  symbol={toToken?.symbol}
                   size="md"
                 />
                 <span className="text-lg font-semibold">
@@ -242,8 +242,8 @@ export default function Home() {
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <TokenIcon
-                        src={toToken.icon}
-                        symbol={toToken.symbol}
+                        src={toToken?.icon}
+                        symbol={toToken?.symbol}
                         size="sm"
                       />
                       <span className="font-medium">{route.toAmount}</span>
