@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -7,27 +7,27 @@ import {
 } from '@/components/ui/dialog';
 import { SearchInput } from '@/components/ui/SearchInput';
 import { TokenIcon } from '@/components/ui/TokenIcon';
-import { ChainIcon } from '@/components/ui/ChainIcon';
+// import { ChainIcon } from '@/components/ui/ChainIcon';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Token, Chain } from '@/types';
-import { mockChains } from '@/data/mockData';
+// import { Token, Chain } from '@/types';
+// import { mockChains } from '@/data/mockData';
 import { cn } from '@/lib/utils';
 import { Check } from 'lucide-react';
 import { useWallet as useAleoWallet } from '@provablehq/aleo-wallet-adaptor-react';
-import { AleoNetworkClient } from '@provablehq/sdk';
+// import { AleoNetworkClient } from '@provablehq/sdk';
 import {useWallets} from "@/hooks/useWallets";
 interface TokenSelectorModalTwoProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelect: (token: Token) => void;
-  selectedToken?: Token;
+  onSelect: (token: any) => void;
+  selectedToken?: any;
   title?: string;
   aleoNetwork?: string;
 }
 
-const networkClient = new AleoNetworkClient(
-  'https://api.explorer.provable.com/v2'
-);
+// const networkClient = new AleoNetworkClient(
+//   'https://api.explorer.provable.com/v2'
+// );
 
 const TokenBalance = ({
   programId,
@@ -115,7 +115,7 @@ const TokenSelectorModalTwo = ({
   //   []
   // );
 
-  const handleSelect = (token: Token) => {
+  const handleSelect = (token: any) => {
     onSelect(token);
     onClose();
     setSearchQuery('');
@@ -169,7 +169,7 @@ const TokenSelectorModalTwo = ({
             >
               All
             </button>
-            {mockChains.map((chain) => (
+            {/* {mockChains.map((chain) => (
               <button
                 key={chain.id}
                 onClick={() => setSelectedChainId(chain.id)}
@@ -183,7 +183,7 @@ const TokenSelectorModalTwo = ({
               >
                 <ChainIcon chainId={chain.id} name={chain.name} size="md" />
               </button>
-            ))}
+            ))} */}
           </div>
 
           <ScrollArea className="flex-1 h-[400px]">
@@ -194,11 +194,12 @@ const TokenSelectorModalTwo = ({
                 </div>
               ) : (
                 aleoTokenList?.data.filter((token: any) => token?.verified === true).map((token: any, index: number) => {
-                  const aleoChain = mockChains.find((c) => c.id === 'aleo');
+                  const aleoChain =
+                    'https://assets.coingecko.com/coins/images/27916/standard/secondary-icon-dark.png?1726770428"';
                   const isSelected =
                     selectedToken?.address === token?.program_name;
 
-                  const displayToken: Token = {
+                  const displayToken = {
                     symbol: token?.symbol,
                     name: token?.display,
                     icon: token?.token_icon_url,
@@ -223,8 +224,8 @@ const TokenSelectorModalTwo = ({
                         src={token?.token_icon_url}
                         symbol={token?.symbol}
                         size="lg"
-                        networkIcon={aleoChain?.icon}
-                        networkName={aleoChain?.name}
+                        networkIcon={aleoChain}
+                        networkName={'aleo'}
                       />
                       <div className="flex-1 text-left">
                         <p className="font-medium">{token?.symbol}</p>

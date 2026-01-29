@@ -226,6 +226,7 @@ export const useWallets = () => {
     disconnectSolana,
     aleoTokenList,
     getPublicTokenBalance,
-    fetchAleoTokenList
+    fetchAleoTokenList,
+    aleoAddress
   };
 };
