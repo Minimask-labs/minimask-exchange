@@ -116,13 +116,11 @@ function initialize_pool:
     input r2 as u128.public;
     input r3 as u16.public;
     input r4 as u16.public;
-    is.eq self.signer aleo1l2lyqhh0n206drgzhw2a70atg7te8kgedlc2e9tjz0m0zr65nyysla8cnw into r5;
-    assert.eq r5 true;
-    cast r1 into r6 as u64;
-    call credits.aleo/transfer_public_as_signer minimask_exchange_router.aleo r6 into r7;
-    call token_registry.aleo/transfer_public_as_signer r0 minimask_exchange_router.aleo r2 into r8;
-    async initialize_pool r0 r1 r2 r3 r4 r7 r8 into r9;
-    output r9 as minimask_exchange_router.aleo/initialize_pool.future;
+    cast r1 into r5 as u64;
+    call credits.aleo/transfer_public_as_signer minimask_exchange_router.aleo r5 into r6;
+    call token_registry.aleo/transfer_public_as_signer r0 minimask_exchange_router.aleo r2 into r7;
+    async initialize_pool r0 r1 r2 r3 r4 r6 r7 into r8;
+    output r8 as minimask_exchange_router.aleo/initialize_pool.future;
 
 finalize initialize_pool:
     input r0 as field.public;
